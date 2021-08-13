@@ -1,0 +1,28 @@
+version: "2.3"
+
+services:
+  # ROS Melodic
+  ros-rplidar:
+    image: husarion/rplidar
+    devices:
+      - /dev/ttyUSB0
+    tty: true        # docker run -t
+    command: roslaunch rplidar_ros rplidar.launch
+
+  # ROS Noetic + ROS 2 Foxy
+  bridge:
+    image: ros:foxy-ros1-bridge
+    environment:
+      - "ROS_MASTER_URI=http://ros-rplidar:11311"
+    command: ros2 run ros1_bridge dynamic_bridge
+
+  # ROS 2 Foxy
+  desktopvnc:
+    build:
+      context: ../../  
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./config.rviz:/root/.rviz2/default.rviz
+    ports: 
+      - 6080:80
+    shm_size: '512m'
