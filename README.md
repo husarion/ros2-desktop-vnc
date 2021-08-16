@@ -18,10 +18,7 @@ docker-compose up --build
 
 2. In the web browser open url: http://localhost:6080/
 
-3. In the virtual desktop go to: 
-> -> "Start" menu 
-> -> System Tools 
-> -> LXTerminal
+3. In the virtual desktop open LXTerminal from desktop shortcut
 
 4. In the `LXTerminal` type:
 

@@ -2,12 +2,12 @@ version: "2.3"
 
 services:
   # ROS Melodic
-  ros-rplidar:
-    image: husarion/rplidar
-    devices:
-      - /dev/ttyUSB0
-    tty: true        # docker run -t
-    command: roslaunch rplidar_ros rplidar.launch
+  # ros-rplidar:
+  #   image: husarion/rplidar
+  #   devices:
+  #     - /dev/ttyUSB0
+  #   tty: true        # docker run -t
+  #   command: roslaunch rplidar_ros rplidar.launch
 
   # ROS Noetic + ROS 2 Foxy
   bridge:
@@ -18,9 +18,7 @@ services:
 
   # ROS 2 Foxy
   desktopvnc:
-    build:
-      context: ../../  
-      dockerfile: ./Dockerfile
+    image: husarion/ros2-desktop-vnc:latest
     volumes:
       - ./config.rviz:/root/.rviz2/default.rviz
     ports: 

@@ -83,7 +83,7 @@ export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp \n\
 " \
 | tee -a /root/.bashrc /home/ubuntu/.bashrc
 
-COPY ./resources/LXTerminal /Desktop/
+COPY ./resources/LXTerminal /root/Desktop/LXTerminal.desktop
 
 COPY ./resources/husarion_1.jpg /usr/local/share/doro-lxde-wallpapers/bg1.jpg
 COPY ./resources/husarion_2.jpg /usr/local/share/doro-lxde-wallpapers/bg2.jpg
