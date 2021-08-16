@@ -83,5 +83,6 @@ export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp \n\
 " \
 | tee -a /root/.bashrc /home/ubuntu/.bashrc
 
-COPY ./husarion_wallpaper_neon_1.jpg /usr/local/share/doro-lxde-wallpapers/bg1.jpg
+COPY ./husarion_1.jpg /usr/local/share/doro-lxde-wallpapers/bg1.jpg
+COPY ./husarion_2.jpg /usr/local/share/doro-lxde-wallpapers/bg2.jpg
 # RUN pcmanfm --set-wallpaper="/root/wallpaper.jpg"
