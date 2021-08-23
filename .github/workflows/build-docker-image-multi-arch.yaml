@@ -34,10 +34,15 @@ jobs:
         file: ./Dockerfile
         platforms: linux/amd64
         build-args: DOCKER_TAG=focal
-        push: true
+        outputs: type=docker,dest=/tmp/amd-image.tar
         tags: husarion/ros2-desktop-vnc:amd64
         cache-from: type=registry,ref=husarion/ros2-desktop-vnc-amd64
         cache-to: type=inline
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: amd-image
+        path: /tmp/amd-image.tar
 
   build-arm:
     runs-on: ubuntu-18.04
@@ -67,10 +72,15 @@ jobs:
         file: ./Dockerfile
         platforms: linux/arm64
         build-args: DOCKER_TAG=focal-arm64
-        push: true
+        outputs: type=docker,dest=/tmp/arm-image.tar
         tags: husarion/ros2-desktop-vnc:arm64
         cache-from: type=registry,ref=husarion/ros2-desktop-vnc-arm64
         cache-to: type=inline
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: arm-image
+        path: /tmp/arm-image.tar
   
   push_manifest:
     runs-on: ubuntu-18.04
@@ -90,6 +100,24 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: arm-image
+          path: /tmp
+      - name: Load image
+        run: |
+          docker load --input /tmp/arm-image.tar
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: amd-image
+          path: /tmp
+      - name: Load image
+        run: |
+          docker load --input /tmp/amd-image.tar
           
       - name: create manifest 
         run: docker manifest create husarion/ros2-desktop-vnc:latest --amend husarion/ros2-desktop-vnc:arm64 --amend husarion/ros2-desktop-vnc:amd64
