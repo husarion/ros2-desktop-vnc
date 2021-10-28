@@ -71,10 +71,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN sudo apt update && \
     sudo apt install -y \
+    ca-certificates \
     ros-foxy-nav2-rviz-plugins \
     ros-foxy-rmw-cyclonedds-cpp \
     ros-foxy-gazebo-ros-pkgs && \
     sudo rm -rf /var/lib/apt/lists/*
+
+RUN sudo update-ca-certificates
 
 RUN echo "\
 \n\

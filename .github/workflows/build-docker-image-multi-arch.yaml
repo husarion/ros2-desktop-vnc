@@ -120,6 +120,6 @@ jobs:
           docker load --input /tmp/amd-image.tar
           
       - name: create manifest 
-        run: docker manifest create husarion/ros2-desktop-vnc:latest --amend husarion/ros2-desktop-vnc:arm64 --amend husarion/ros2-desktop-vnc:amd64
+        run: docker manifest create husarion/ros2-desktop-vnc:latest --amend husarion/ros2-desktop-vnc:arm64 --amend husarion/ros2-desktop-vnc:amd64 --insecure
       - name: push manifest
         run: docker manifest push husarion/ros2-desktop-vnc:latest
