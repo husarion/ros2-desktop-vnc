@@ -1,9 +1,34 @@
 # ros2-desktop-vnc
 
 Based on [docker-ubuntu-vnc-desktop](https://github.com/fcwu/docker-ubuntu-vnc-desktop) project with ROS 2 packages installed the same way, as in official [OSRF ROS 2 Docker images](https://github.com/osrf/docker_images/tree/master/ros/foxy/ubuntu/focal).
+
 This container initiates [vnc server](https://github.com/LibVNC/x11vnc) that allows remote access using graphical user interface. [HTML VNC Client](https://github.com/novnc/noVNC) is than used to allow for easy access in web browser. 
+
 Container creates separate graphical (Ubuntu LXDE/LxQT) and user environment, so no user files nor any applications launched on host will be accessible via VNC.  
 
+## Building locally
+
+The repository contains GitHub Actions workflows for automatic build & deployment to this [Docker Hub repo](https://hub.docker.com/r/husarion/ros2-desktop-vnc), but you can also build it locally:
+
+### AMD64 arch
+
+```bash
+docker buildx build \
+--platform linux/amd64 \
+--build-arg DOCKER_TAG=focal \
+-t husarion/ros2-desktop-vnc:amd64 \
+.
+```
+
+### ARM64 arch
+
+```bash
+docker buildx build \
+--platform linux/arm64 \
+--build-arg DOCKER_TAG=focal-arm64 \
+-t husarion/ros2-desktop-vnc:arm64 \
+.
+```
 
 ## Example
 
